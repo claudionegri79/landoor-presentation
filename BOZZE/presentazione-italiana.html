@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valore Strategico Landoor - Presentazione Acquisizione</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f0f0f;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 20px 40px;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 100px 40px 40px;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: calc(100vh - 100px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: clamp(40px, 8vw, 80px);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #fff 0%, #667eea 50%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            color: #999;
+            margin-bottom: 50px;
+            max-width: 800px;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 80px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-5px);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: #999;
+            margin-top: 10px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Calendar Page */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .month-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.3s;
+        }
+
+        .month-card:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: scale(1.02);
+        }
+
+        .month-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .month-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .month-theme {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .month-activities {
+            margin-top: 15px;
+        }
+
+        .activity {
+            padding: 10px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid #667eea;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .activity strong {
+            color: #fff;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Contract Page */
+        .contract-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .contract-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contract-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .contract-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .contract-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .contract-detail {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .contract-value {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        /* AI Leadership Page */
+        .ai-showcase {
+            margin-top: 40px;
+        }
+
+        .linkedin-post {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+
+        .linkedin-post:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .post-date {
+            color: #667eea;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .post-metrics {
+            display: flex;
+            gap: 20px;
+        }
+
+        .metric {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .metric span {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .post-content {
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .post-highlight {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+            border-left: 3px solid #667eea;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-style: italic;
+        }
+
+        /* Trade Shows Page */
+        .shows-timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .show-event {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .show-event:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .show-content {
+            width: 45%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s;
+        }
+
+        .show-content:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: scale(1.05);
+        }
+
+        .show-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #667eea;
+            border: 4px solid #0f0f0f;
+            border-radius: 50%;
+        }
+
+        .show-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .show-date {
+            color: #667eea;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .show-sector {
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* Value Summary Page */
+        .value-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .value-section {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+        }
+
+        .value-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+
+        .value-list {
+            list-style: none;
+        }
+
+        .value-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #ccc;
+            display: flex;
+            align-items: center;
+        }
+
+        .value-list li:last-child {
+            border-bottom: none;
+        }
+
+        .value-icon {
+            margin-right: 15px;
+            color: #667eea;
+            font-size: 20px;
+        }
+
+        .cta-section {
+            margin-top: 60px;
+            text-align: center;
+            padding: 60px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 30px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .cta-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-text {
+            font-size: 18px;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .value-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-line {
+                left: 20px;
+            }
+
+            .show-event, .show-event:nth-child(even) {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .show-content {
+                width: 100%;
+                margin-left: 40px;
+            }
+
+            .show-marker {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <div class="logo">LANDOOR</div>
+            <div class="nav-links">
+                <a class="nav-link active" onclick="showPage('overview')">Panoramica</a>
+                <a class="nav-link" onclick="showPage('calendar')">Calendario Ricavi</a>
+                <a class="nav-link" onclick="showPage('contract')">Valore Strategico</a>
+                <a class="nav-link" onclick="showPage('ai')">Leadership AI</a>
+                <a class="nav-link" onclick="showPage('shows')">Fiere Commerciali</a>
+                <a class="nav-link" onclick="showPage('summary')">Piano Integrazione</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Overview Page -->
+    <div class="page active" id="overview">
+        <div class="container">
+            <div class="hero">
+                <h1 class="hero-title">Consulente Strategico Marketing & Vendite</h1>
+                <p class="hero-subtitle">Non solo comunicazione marketing. Generazione di ricavi attraverso strategie go-to-market integrate.</p>
+
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">€2.2K</div>
+                        <div class="stat-label">Investimento Mensile</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Campagne Settoriali/Anno</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label">Fiere Gestite</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">Settimanale</div>
+                        <div class="stat-label">Allineamento Vendite</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Calendar Page -->
+    <div class="page" id="calendar">
+        <div class="container">
+            <h2 class="hero-title" style="font-size: 48px; margin-bottom: 20px;">Calendario Marketing Ricavi 2025</h2>
+            <p style="color: #999; font-size: 18px; margin-bottom: 40px;">Campagne integrate che guidano la pipeline attraverso 6 settori chiave</p>
+
+            <div class="calendar-grid">
+                <div class="month-card">
+                    <div class="month-header">
+                        <span class="month-name">Gennaio</span>
+                        <span class="month-theme">MODA</span>
+                    </div>
+                    <div class="month-activities">
+                        <div class="activity">
+                            <strong>Marketing:</strong> Preparazione Fashion Week, case study brand
+                        </div>
+                        <div class="activity">
+                            <strong>Vendite:</strong> Analisi clienti moda, campagne di follow-up
+                        </div>
+                        <div class="activity">
+                            <strong>Eventi:</strong> Coordinamento Milano Fashion Week
+                        </div>
+                    </div>
+                </div>
+
+                <div class="month-card">
+                    <div class="month-header">
+                        <span class="month-name">Febbraio</span>
+                        <span class="month-theme">COSMETICA</span>
+                    </div>
+                    <div class="month-activities">
+                        <div class="activity">
+                            <strong>Marketing:</strong> Targeting settore beauty, preparazione Cosmoprof
+                        </div>
+                        <div class="activity">
+                            <strong>Vendite:</strong> Generazione lead brand beauty
+                        </div>
+                        <div class="activity">
+                            <strong>Eventi:</strong> COSMOPROF Bologna
+                        </div>
+                    </div>
+                </div>
+
+                <div class="month-card">
+                    <div class="month-header">
+                        <span class="month-name">Marzo</span>
+                        <span class="month-theme">PARTNERSHIP</span>
+                    </div>
+                    <div class="month-activities">
+                        <div class="activity">
+                            <strong>Marketing:</strong> Lancio programma referral
+                        </div>
+                        <div class="activity">
+                            <strong>Vendite:</strong> Identificazione top clienti referral
+                        </div>
+                        <div class="activity">
+                            <strong>Strategia:</strong> Case study partnership
+                        </div>
+                    </div>
+                </div>
+
+                <div class="month-card">
+                    <div class="month-header">
+                        <span class="month-name">Aprile</span>
+                        <span class="month-theme">TECNICO</span>
+                    </div>
+                    <div class="month-activities">
+                        <div class="activity">
+                            <strong>Marketing:</strong> Focus settore Oil & Gas
+                        </div>
+                        <div class="activity">
+                            <strong>Vendite:</strong> Account tecnici enterprise
+                        </div>
+                        <div class="activity">
+                            <strong>Contenuti:</strong> Best practice documentazione tecnica
+                        </div>
+                    </div>
+                </div>
+
+                <div class="month-card">
+                    <div class="month-header">
+                        <span class="month-name">Maggio</span>
+                        <span class="month-theme">INSIGHT INDUSTRIALI</span>
+                    </div>
+                    <div class="month-activities">
+                        <div class="activity">
+                            <strong>Marketing:</strong> Report analisi settoriale
+                        </div>
+                        <div class="activity">
+                            <strong>Vendite:</strong> Raccolta testimonial clienti
+                        </div>
+                        <div class="activity">
+                            <strong>Eventi:</strong> TUTTOFOOD Milano
+                        </div>
+                    </div>
+                </div>
+
+                <div class="month-card">
+                    <div class="month-header">
+                        <span class="month-name">Giugno</span>
+                        <span class="month-theme">INNOVAZIONE</span>
+                    </div>
+                    <div class="month-activities">
+                        <div class="activity">
+                            <strong>Marketing:</strong> Showcase servizi AI
+                        </div>
+                        <div class="activity">
+                            <strong>Vendite:</strong> Progetti pilota innovazione con clienti chiave
+                        </div>
+                        <div class="activity">
+                            <strong>Tech:</strong> Sintesi vocale, doppiaggio digitale
+                        </div>
+                    </div>
+                </div>
+
+                <div class="month-card">
+                    <div class="month-header">
+                        <span class="month-name">Settembre</span>
+                        <span class="month-theme">TEST TRADUZIONE</span>
+                    </div>
+                    <div class="month-activities">
+                        <div class="activity">
+                            <strong>Marketing:</strong> Campagne prova gratuita
+                        </div>
+                        <div class="activity">
+                            <strong>Vendite:</strong> Riattivazione post-estiva
+                        </div>
+                        <div class="activity">
+                            <strong>Offerta:</strong> POC senza rischio per prospect
+                        </div>
+                    </div>
+                </div>
+
+                <div class="month-card">
+                    <div class="month-header">
+                        <span class="month-name">Ottobre</span>
+                        <span class="month-theme">FINANZIARIO</span>
+                    </div>
+                    <div class="month-activities">
+                        <div class="activity">
+                            <strong>Marketing:</strong> Focus reporting fine anno
+                        </div>
+                        <div class="activity">
+                            <strong>Vendite:</strong> Outreach banche e studi legali
+                        </div>
+                        <div class="activity">
+                            <strong>Eventi:</strong> CPHI Francoforte
+                        </div>
+                    </div>
+                </div>
+
+                <div class="month-card">
+                    <div class="month-header">
+                        <span class="month-name">Novembre</span>
+                        <span class="month-theme">LIFE SCIENCES</span>
+                    </div>
+                    <div class="month-activities">
+                        <div class="activity">
+                            <strong>Marketing:</strong> Campagne settore pharma
+                        </div>
+                        <div class="activity">
+                            <strong>Vendite:</strong> Produttori dispositivi medici
+                        </div>
+                        <div class="activity">
+                            <strong>Eventi:</strong> MEDICA Düsseldorf
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contract Page -->
+    <div class="page" id="contract">
+        <div class="container">
+            <h2 class="hero-title" style="font-size: 48px; margin-bottom: 20px;">Status Consulente Strategico</h2>
+            <p style="color: #999; font-size: 18px; margin-bottom: 40px;">Termini contrattuali chiave che dimostrano valore strategico e complessità di integrazione</p>
+
+            <div class="contract-highlights">
+                <div class="contract-card">
+                    <div class="contract-icon">🎯</div>
+                    <div class="contract-title">Coordinamento Strategico</div>
+                    <div class="contract-detail">
+                        Allineamento settimanale con team Vendite e Operazioni per:
+                    </div>
+                    <div class="contract-detail">
+                        • Analisi trend di mercato<br>
+                        • Identificazione e qualificazione lead<br>
+                        • Pianificazione ed esecuzione campagne<br>
+                        • Sviluppo pipeline
+                    </div>
+                </div>
+
+                <div class="contract-card">
+                    <div class="contract-icon">💼</div>
+                    <div class="contract-title">Indipendenza Consulenziale</div>
+                    <div class="contract-detail">
+                        <span class="contract-value">Piena autonomia</span> nell'esecuzione con allineamento strategico
+                    </div>
+                    <div class="contract-detail">
+                        • Non dipendente - consulente strategico<br>
+                        • Reporting diretto al CEO<br>
+                        • Influenza interfunzionale
+                    </div>
+                </div>
+
+                <div class="contract-card">
+                    <div class="contract-icon">🔒</div>
+                    <div class="contract-title">Protezione Non-Compete</div>
+                    <div class="contract-detail">
+                        <span class="contract-value">€368/mese</span> specificamente per esclusività
+                    </div>
+                    <div class="contract-detail">
+                        Protetto da Way2Global e Aglatech14 - competitor diretti che mostrano importanza strategica
+                    </div>
+                </div>
+
+                <div class="contract-card">
+                    <div class="contract-icon">📊</div>
+                    <div class="contract-title">Complessità Risoluzione</div>
+                    <div class="contract-detail">
+                        <span class="contract-value">4 mesi preavviso + compenso</span>
+                    </div>
+                    <div class="contract-detail">
+                        • €200/mese per ogni mese di servizio<br>
+                        • Periodo transfer knowledge richiesto<br>
+                        • Impatto finanziario significativo
+                    </div>
+                </div>
+
+                <div class="contract-card">
+                    <div class="contract-icon">🎪</div>
+                    <div class="contract-title">Gestione Eventi</div>
+                    <div class="contract-detail">
+                        Coordinamento eventi annuale incluso:
+                    </div>
+                    <div class="contract-detail">
+                        • Gestione piattaforme (Eventbrite, LinkedIn)<br>
+                        • Campagne pre/post evento<br>
+                        • Presenza e supporto on-site
+                    </div>
+                </div>
+
+                <div class="contract-card">
+                    <div class="contract-icon">🚀</div>
+                    <div class="contract-title">Impatto sui Ricavi</div>
+                    <div class="contract-detail">
+                        Influenza diretta sulla pipeline attraverso:
+                    </div>
+                    <div class="contract-detail">
+                        • Segmentazione database<br>
+                        • Workflow nurturing lead<br>
+                        • Materiali abilitazione vendite<br>
+                        • Ottimizzazione conversioni
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Leadership Page -->
+    <div class="page" id="ai">
+        <div class="container">
+            <h2 class="hero-title" style="font-size: 48px; margin-bottom: 20px;">Leadership Tecnologica AI</h2>
+            <p style="color: #999; font-size: 18px; margin-bottom: 40px;">Posizionamento di Landoor all'avanguardia dell'integrazione AI nei servizi linguistici</p>
+
+            <div class="ai-showcase">
+                <div class="linkedin-post">
+                    <div class="post-header">
+                        <span class="post-date">Settembre 2025</span>
+                        <div class="post-metrics">
+                            <span class="metric">Impressioni: <span>2.357</span></span>
+                            <span class="metric">Engagement: <span>15%</span></span>
+                        </div>
+                    </div>
+                    <h3 style="font-size: 24px; margin-bottom: 20px;">Da Human-in-the-Loop a Human-in-the-Cockpit</h3>
+                    <div class="post-content">
+                        Webinar strategico con CEO Adele Nardulli posizionando i traduttori non come avversari dell'AI ma come piloti dell'AI.
+                    </div>
+                    <div class="post-highlight">
+                        "Il ruolo del traduttore evolve da difensore a custode della qualità nel nuovo contesto tecnologico"
+                    </div>
+                </div>
+
+                <div class="linkedin-post">
+                    <div class="post-header">
+                        <span class="post-date">Luglio-Agosto 2025</span>
+                        <div class="post-metrics">
+                            <span class="metric">Serie in 4 Parti</span>
+                            <span class="metric">Media Impressioni: <span>500+</span></span>
+                        </div>
+                    </div>
+                    <h3 style="font-size: 24px; margin-bottom: 20px;">Serie Mitigazione Rischi AI</h3>
+                    <div class="post-content">
+                        Serie di contenuti completa che affronta:
+                        <br><br>
+                        • Allucinazioni AI in documenti legali<br>
+                        • Bias culturale nella traduzione automatica<br>
+                        • Preservazione del DNA di brand con AI<br>
+                        • Controllo umano come vantaggio competitivo
+                    </div>
+                    <div class="post-highlight">
+                        "AI + Umano = Il meglio di entrambi i mondi. La voce autentica della tua azienda preservata."
+                    </div>
+                </div>
+
+                <div class="linkedin-post">
+                    <div class="post-header">
+                        <span class="post-date">Campagna Fashion Week</span>
+                        <div class="post-metrics">
+                            <span class="metric">Impressioni: <span>955</span></span>
+                            <span class="metric">Condivisioni: <span>19</span></span>
+                        </div>
+                    </div>
+                    <h3 style="font-size: 24px; margin-bottom: 20px;">Eccellenza Settore-Specifica</h3>
+                    <div class="post-content">
+                        Campagne Moda e Pharma che dimostrano expertise verticale profonda:
+                    </div>
+                    <div class="post-highlight">
+                        "Non traduciamo istruzioni. Traduciamo SPERANZA. Traduciamo GUARIGIONE. Traduciamo IL FUTURO DELLA SALUTE."
+                    </div>
+                    <div class="post-content" style="margin-top: 20px;">
+                        Questo posizionamento di connessione emotiva + eccellenza tecnica risuona con i clienti enterprise.
+                    </div>
+                </div>
+
+                <div class="linkedin-post">
+                    <div class="post-header">
+                        <span class="post-date">AI Week Milano</span>
+                        <div class="post-metrics">
+                            <span class="metric">Presenza Evento</span>
+                            <span class="metric">Gen Lead: <span>45+</span></span>
+                        </div>
+                    </div>
+                    <h3 style="font-size: 24px; margin-bottom: 20px;">Leadership Eventi Settore</h3>
+                    <div class="post-content">
+                        Partecipazione attiva in eventi AI maggiori, posizionando Landoor come leader innovazione mantenendo valori umano-centrici.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trade Shows Page -->
+    <div class="page" id="shows">
+        <div class="container">
+            <h2 class="hero-title" style="font-size: 48px; margin-bottom: 20px;">Eccellenza Fiere Commerciali</h2>
+            <p style="color: #999; font-size: 18px; margin-bottom: 40px;">20+ eventi strategici annualmente con campagne integrate pre/durante/post</p>
+
+            <div class="shows-timeline">
+                <div class="timeline-line"></div>
+
+                <div class="show-event">
+                    <div class="show-content">
+                        <div class="show-name">Milano Fashion Week</div>
+                        <div class="show-date">Gennaio & Settembre</div>
+                        <div class="show-sector">Moda & Lusso</div>
+                    </div>
+                    <div class="show-marker"></div>
+                </div>
+
+                <div class="show-event">
+                    <div class="show-content">
+                        <div class="show-name">COSMOPROF</div>
+                        <div class="show-date">Marzo</div>
+                        <div class="show-sector">Beauty & Cosmetica</div>
+                    </div>
+                    <div class="show-marker"></div>
+                </div>
+
+                <div class="show-event">
+                    <div class="show-content">
+                        <div class="show-name">Salone del Mobile</div>
+                        <div class="show-date">Aprile</div>
+                        <div class="show-sector">Design & Architettura</div>
+                    </div>
+                    <div class="show-marker"></div>
+                </div>
+
+                <div class="show-event">
+                    <div class="show-content">
+                        <div class="show-name">TUTTOFOOD</div>
+                        <div class="show-date">Maggio</div>
+                        <div class="show-sector">Food & Beverage</div>
+                    </div>
+                    <div class="show-marker"></div>
+                </div>
+
+                <div class="show-event">
+                    <div class="show-content">
+                        <div class="show-name">CPHI Francoforte</div>
+                        <div class="show-date">Ottobre</div>
+                        <div class="show-sector">Farmaceutico</div>
+                    </div>
+                    <div class="show-marker"></div>
+                </div>
+
+                <div class="show-event">
+                    <div class="show-content">
+                        <div class="show-name">MEDICA</div>
+                        <div class="show-date">Novembre</div>
+                        <div class="show-sector">Dispositivi Medici</div>
+                    </div>
+                    <div class="show-marker"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary Page -->
+    <div class="page" id="summary">
+        <div class="container">
+            <h2 class="hero-title" style="font-size: 48px; margin-bottom: 20px;">Proposta Valore Integrazione</h2>
+            <p style="color: #999; font-size: 18px; margin-bottom: 40px;">Perché la continuità è importante per un'acquisizione di successo</p>
+
+            <div class="value-grid">
+                <div class="value-section">
+                    <h3 class="value-title">🎯 Valore Attuale</h3>
+                    <ul class="value-list">
+                        <li>
+                            <span class="value-icon">✓</span>
+                            Orchestrazione pipeline ricavi attraverso 6 settori
+                        </li>
+                        <li>
+                            <span class="value-icon">✓</span>
+                            20+ relazioni fiere commerciali e workflow
+                        </li>
+                        <li>
+                            <span class="value-icon">✓</span>
+                            Processo allineamento vendite-marketing settimanale
+                        </li>
+                        <li>
+                            <span class="value-icon">✓</span>
+                            Posizionamento thought leadership AI
+                        </li>
+                        <li>
+                            <span class="value-icon">✓</span>
+                            Database lead qualificati per verticale
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="value-section">
+                    <h3 class="value-title">🚀 Opportunità Integrazione</h3>
+                    <ul class="value-list">
+                        <li>
+                            <span class="value-icon">→</span>
+                            Scalare modello ad altri mercati Europa Sud
+                        </li>
+                        <li>
+                            <span class="value-icon">→</span>
+                            Documentare e replicare best practice globalmente
+                        </li>
+                        <li>
+                            <span class="value-icon">→</span>
+                            Integrare intelligence locale con CRM globale
+                        </li>
+                        <li>
+                            <span class="value-icon">→</span>
+                            Mantenere fiducia cliente durante transizione
+                        </li>
+                        <li>
+                            <span class="value-icon">→</span>
+                            Colmare gap culturali in strategia go-to-market
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="value-section">
+                    <h3 class="value-title">⚠️ Rischi Interruzione</h3>
+                    <ul class="value-list">
+                        <li>
+                            <span class="value-icon">✗</span>
+                            6-12 mesi interruzione pipeline
+                        </li>
+                        <li>
+                            <span class="value-icon">✗</span>
+                            Perdita relazioni fiere commerciali
+                        </li>
+                        <li>
+                            <span class="value-icon">✗</span>
+                            Disallineamento vendite-marketing
+                        </li>
+                        <li>
+                            <span class="value-icon">✗</span>
+                            Incertezza cliente e potenziale churn
+                        </li>
+                        <li>
+                            <span class="value-icon">✗</span>
+                            Gap intelligence di mercato
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="value-section">
+                    <h3 class="value-title">💡 Evoluzione Proposta</h3>
+                    <ul class="value-list">
+                        <li>
+                            <span class="value-icon">1</span>
+                            Lead Integrazione (6-12 mesi transizione)
+                        </li>
+                        <li>
+                            <span class="value-icon">2</span>
+                            Direttore Marketing Europa Sud
+                        </li>
+                        <li>
+                            <span class="value-icon">3</span>
+                            Manager Relazioni Account Strategici
+                        </li>
+                        <li>
+                            <span class="value-icon">4</span>
+                            Consulente Best Practice Globali
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h2 class="cta-title">La Scelta Strategica</h2>
+                <p class="cta-text">
+                    Non sono un centro di costo. Sono un abilitatore di ricavi con conoscenza di mercato insostituibile.<br>
+                    Il mio valore non è nei compiti svolti, ma nelle relazioni mantenute e nei ricavi generati.
+                </p>
+                <a href="mailto:claudio.negri@gmail.com" class="cta-button">Discutiamo la Strategia di Integrazione</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Remove active class from all nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+
+            // Add active class to clicked nav link
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
