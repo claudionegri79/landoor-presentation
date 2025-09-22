@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settori Focus - Marketing Intelligence</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: #333333;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background: rgba(107, 114, 128, 0.1);
+            color: #6b7280;
+        }
+
+        .lang-toggle {
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-button {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 1px solid #d1d5db;
+            background: transparent;
+            color: #333333;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .lang-button.active {
+            background: #6b7280;
+            border-color: #6b7280;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+
+        .sector-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .sector-card {
+            background: rgba(243, 244, 246, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid #6b7280;
+            transition: transform 0.3s;
+        }
+
+        .sector-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .sector-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .sector-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 24px;
+            color: white;
+        }
+
+        .sector-title {
+            font-size: 1.8em;
+            color: #666666;
+            font-weight: bold;
+        }
+
+        .activities {
+            margin-top: 20px;
+        }
+
+        .activity-item {
+            background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border-left: 3px solid #9ca3af;
+        }
+
+        .activity-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .activity-desc {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .stats-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            margin-top: 40px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%);
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #6b7280;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: #6b7280;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .italian { display: block; }
+        .english { display: none; }
+
+        body.lang-en .italian { display: none; }
+        body.lang-en .english { display: block; }
+
+        @media (max-width: 768px) {
+            .container { padding: 10px; }
+            .sector-grid { grid-template-columns: 1fr; }
+            .nav-buttons { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="index.html" class="logo">LANDOOR</a>
+            <div class="nav-center">
+                <a href="index.html" class="nav-link">
+                    <span class="italian">Marketing Highlights</span>
+                    <span class="english">Marketing Highlights</span>
+                </a>
+                <a href="index.html#program" class="nav-link">
+                    <span class="italian">Programma Marketing</span>
+                    <span class="english">Marketing Program</span>
+                </a>
+                <a href="index.html#calendar" class="nav-link">
+                    <span class="italian">Calendario Strategico</span>
+                    <span class="english">Strategic Calendar</span>
+                </a>
+                <a href="index.html#alignment" class="nav-link">
+                    <span class="italian">Allineamento Sales</span>
+                    <span class="english">Sales Alignment</span>
+                </a>
+                <a href="index.html#profile" class="nav-link">
+                    <span class="italian">Esperto Settore</span>
+                    <span class="english">Industry Expert</span>
+                </a>
+            </div>
+            <div class="lang-toggle">
+                <button class="lang-button active" onclick="switchLanguage('en')">EN</button>
+                <button class="lang-button" onclick="switchLanguage('it')">IT</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div style="text-align: center; margin: 40px 0 60px 0;">
+            <h1 style="font-size: clamp(32px, 6vw, 48px); font-weight: 700; color: #333333; margin-bottom: 20px;">
+                <span class="italian">Settori Focus & Attività Svolte</span>
+                <span class="english">Focus Sectors & Activities Performed</span>
+            </h1>
+            <p style="color: #6b7280; font-size: 18px; max-width: 800px; margin: 0 auto;">
+                <span class="italian">Intelligence settoriale e penetrazione mercato premium italiano</span>
+                <span class="english">Sector intelligence and Italian premium market penetration</span>
+            </p>
+        </div>
+
+        <div class="sector-grid">
+            <!-- Fashion & Luxury -->
+            <div class="sector-card">
+                <div class="sector-header">
+                    <div class="sector-icon">👗</div>
+                    <div>
+                        <div class="sector-title italian">Fashion & Luxury</div>
+                        <div class="sector-title english">Fashion & Luxury</div>
+                    </div>
+                </div>
+                <div class="activities">
+                    <div class="activity-item">
+                        <div class="activity-title italian">Milano Fashion Week & Fiere Settore</div>
+                        <div class="activity-title english">Milano Fashion Week & Industry Trade Shows</div>
+                        <div class="activity-desc italian">Fashion Week (Feb/Set), MIPEL pelletteria (Feb), MIDO occhialeria (Feb). Networking diretto con buyer internazionali, brand manager, decision maker luxury. 15+ contatti qualificati per evento.</div>
+                        <div class="activity-desc english">Fashion Week (Feb/Sep), MIPEL leather goods (Feb), MIDO eyewear (Feb). Direct networking with international buyers, brand managers, luxury decision makers. 15+ qualified contacts per event.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-title italian">Database Luxury Brands</div>
+                        <div class="activity-title english">Luxury Brands Database</div>
+                        <div class="activity-desc italian">2,500+ contatti verificati nei top brand italiani: Prada, Versace, Dolce&Gabbana, Bottega Veneta, etc.</div>
+                        <div class="activity-desc english">2,500+ verified contacts in top Italian brands: Prada, Versace, Dolce&Gabbana, Bottega Veneta, etc.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-title italian">Campagne Stagionali</div>
+                        <div class="activity-title english">Seasonal Campaigns</div>
+                        <div class="activity-desc italian">Newsletter pre-sfilate, trend report, servizi localizzazione per comunicazione brand premium.</div>
+                        <div class="activity-desc english">Pre-runway newsletters, trend reports, localization services for premium brand communication.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pharma & Healthcare -->
+            <div class="sector-card">
+                <div class="sector-header">
+                    <div class="sector-icon">💊</div>
+                    <div>
+                        <div class="sector-title italian">Pharma & Healthcare</div>
+                        <div class="sector-title english">Pharma & Healthcare</div>
+                    </div>
+                </div>
+                <div class="activities">
+                    <div class="activity-item">
+                        <div class="activity-title italian">Fiere Pharma Internazionali</div>
+                        <div class="activity-title english">International Pharma Trade Shows</div>
+                        <div class="activity-desc italian">CPHI Frankfurt (Ott), MEDICA Düsseldorf (Nov), ARAB HEALTH Dubai (Gen), INTERPHEX New York (Apr), FIME Miami (Giu). Focus aziende italiane: Chiesi, Angelini, Recordati.</div>
+                        <div class="activity-desc english">CPHI Frankfurt (Oct), MEDICA Düsseldorf (Nov), ARAB HEALTH Dubai (Jan), INTERPHEX New York (Apr), FIME Miami (Jun). Focus on Italian companies: Chiesi, Angelini, Recordati.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-title italian">Regulatory Intelligence</div>
+                        <div class="activity-title english">Regulatory Intelligence</div>
+                        <div class="activity-desc italian">3,200+ contatti verificati: regulatory affairs, medical writers, clinical research manager.</div>
+                        <div class="activity-desc english">3,200+ verified contacts: regulatory affairs, medical writers, clinical research managers.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-title italian">Content Specializzato</div>
+                        <div class="activity-title english">Specialized Content</div>
+                        <div class="activity-desc italian">White paper regolamenti EMA, newsletter compliance, case study localizzazione farmaceutica.</div>
+                        <div class="activity-desc english">EMA regulation white papers, compliance newsletters, pharmaceutical localization case studies.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Design & Architecture -->
+            <div class="sector-card">
+                <div class="sector-header">
+                    <div class="sector-icon">🏛️</div>
+                    <div>
+                        <div class="sector-title italian">Design & Architettura</div>
+                        <div class="sector-title english">Design & Architecture</div>
+                    </div>
+                </div>
+                <div class="activities">
+                    <div class="activity-item">
+                        <div class="activity-title italian">Salone del Mobile & Fiere Design</div>
+                        <div class="activity-title english">Salone del Mobile & Design Trade Shows</div>
+                        <div class="activity-desc italian">Salone del Mobile Milano (Apr), CERSAIE ceramiche Bologna (Set). Presence strategica al Fuorisalone, networking con architect e interior designer, lead generation premium.</div>
+                        <div class="activity-desc english">Salone del Mobile Milano (Apr), CERSAIE ceramics Bologna (Sep). Strategic presence at Fuorisalone, networking with architects and interior designers, premium lead generation.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-title italian">Made in Italy Network</div>
+                        <div class="activity-title english">Made in Italy Network</div>
+                        <div class="activity-desc italian">1,800+ contatti in aziende design italiane: Cassina, B&B Italia, Kartell, Poltrona Frau.</div>
+                        <div class="activity-desc english">1,800+ contacts in Italian design companies: Cassina, B&B Italia, Kartell, Poltrona Frau.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-title italian">Content Design-Focused</div>
+                        <div class="activity-title english">Design-Focused Content</div>
+                        <div class="activity-desc italian">Newsletter design trends, case study localizzazione cataloghi, partnership studi architettura.</div>
+                        <div class="activity-desc english">Design trends newsletter, catalog localization case studies, architecture firm partnerships.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Food & Beverage -->
+            <div class="sector-card">
+                <div class="sector-header">
+                    <div class="sector-icon">🍷</div>
+                    <div>
+                        <div class="sector-title italian">Food & Beverage</div>
+                        <div class="sector-title english">Food & Beverage</div>
+                    </div>
+                </div>
+                <div class="activities">
+                    <div class="activity-item">
+                        <div class="activity-title italian">TUTTOFOOD Milano & Fiere Food</div>
+                        <div class="activity-title english">TUTTOFOOD Milano & Food Trade Shows</div>
+                        <div class="activity-desc italian">TUTTOFOOD Milano (Mag), MARCA private label (Gen). Focus aziende premium: Barilla, Ferrero, Lavazza. Export manager, brand manager internazionali.</div>
+                        <div class="activity-desc english">TUTTOFOOD Milano (May), MARCA private label (Jan). Focus on premium companies: Barilla, Ferrero, Lavazza. Export managers, international brand managers.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-title italian">Wine & Spirits</div>
+                        <div class="activity-title english">Wine & Spirits</div>
+                        <div class="activity-desc italian">2,100+ contatti nel settore vino: Antinori, Frescobaldi, marketing manager cantine premium.</div>
+                        <div class="activity-desc english">2,100+ wine sector contacts: Antinori, Frescobaldi, premium winery marketing managers.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-title italian">Export Intelligence</div>
+                        <div class="activity-title english">Export Intelligence</div>
+                        <div class="activity-desc italian">Newsletter export food, trend internazionalizzazione, case study localizzazione packaging.</div>
+                        <div class="activity-desc english">Food export newsletter, internationalization trends, packaging localization case studies.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technology & AI -->
+            <div class="sector-card">
+                <div class="sector-header">
+                    <div class="sector-icon">🤖</div>
+                    <div>
+                        <div class="sector-title italian">Technology & IA</div>
+                        <div class="sector-title english">Technology & AI</div>
+                    </div>
+                </div>
+                <div class="activities">
+                    <div class="activity-item">
+                        <div class="activity-title italian">Eventi Tech & AI</div>
+                        <div class="activity-title english">Tech & AI Events</div>
+                        <div class="activity-desc italian">AI Festival Milano (Feb), We Make Future Bologna (Giu), IAB Forum Milano (Ott). Webinar mensili IA+traduzione, partnership CAT tool provider, posizionamento thought leadership.</div>
+                        <div class="activity-desc english">AI Festival Milano (Feb), We Make Future Bologna (Jun), IAB Forum Milano (Oct). Monthly AI+translation webinars, CAT tool provider partnerships, thought leadership positioning.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-title italian">Tech Startups Network</div>
+                        <div class="activity-title english">Tech Startups Network</div>
+                        <div class="activity-desc italian">1,200+ contatti startup tech italiane, scale-up internazionalizzazione, CMO e Growth Manager.</div>
+                        <div class="activity-desc english">1,200+ Italian tech startup contacts, internationalization scale-ups, CMOs and Growth Managers.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-title italian">Content Innovation</div>
+                        <div class="activity-title english">Content Innovation</div>
+                        <div class="activity-desc italian">Blog AI e localizzazione, case study automazione, newsletter tech trends per decision maker.</div>
+                        <div class="activity-desc english">AI and localization blog, automation case studies, tech trends newsletter for decision makers.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Beauty & Cosmetics -->
+            <div class="sector-card">
+                <div class="sector-header">
+                    <div class="sector-icon">💄</div>
+                    <div>
+                        <div class="sector-title italian">Beauty & Cosmetica</div>
+                        <div class="sector-title english">Beauty & Cosmetics</div>
+                    </div>
+                </div>
+                <div class="activities">
+                    <div class="activity-item">
+                        <div class="activity-title italian">Cosmoprof Bologna</div>
+                        <div class="activity-title english">Cosmoprof Bologna</div>
+                        <div class="activity-desc italian">Cosmoprof Bologna (Mar). Networking con brand manager internazionali, distributori, decision maker beauty premium.</div>
+                        <div class="activity-desc english">Cosmoprof Bologna (Mar). Networking with international brand managers, distributors, premium beauty decision makers.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-title italian">Made in Italy Beauty</div>
+                        <div class="activity-title english">Made in Italy Beauty</div>
+                        <div class="activity-desc italian">1,500+ contatti aziende cosmetiche italiane: Kiko, Davines, Comfort Zone. Marketing manager, export director.</div>
+                        <div class="activity-desc english">1,500+ Italian cosmetic company contacts: Kiko, Davines, Comfort Zone. Marketing managers, export directors.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-title italian">Content Beauty-Focused</div>
+                        <div class="activity-title english">Beauty-Focused Content</div>
+                        <div class="activity-desc italian">Newsletter beauty trends, case study localizzazione packaging, compliance regolamenti cosmetici.</div>
+                        <div class="activity-desc english">Beauty trends newsletter, packaging localization case studies, cosmetic regulation compliance.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="stats-section">
+            <h2 class="italian" style="color: #dc2626; text-align: center; margin-bottom: 30px;">Risultati Complessivi per Settore</h2>
+            <h2 class="english" style="color: #dc2626; text-align: center; margin-bottom: 30px;">Overall Sector Results</h2>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">12K+</div>
+                    <div class="stat-label italian">Contatti Verificati Totali</div>
+                    <div class="stat-label english">Total Verified Contacts</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label italian">Eventi Annuali</div>
+                    <div class="stat-label english">Annual Events</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">85%</div>
+                    <div class="stat-label italian">Lead Qualificati</div>
+                    <div class="stat-label english">Qualified Leads</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label italian">Settori Premium</div>
+                    <div class="stat-label english">Premium Sectors</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label italian">Anni Esperienza</div>
+                    <div class="stat-label english">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">€368</div>
+                    <div class="stat-label italian">Investimento Mensile</div>
+                    <div class="stat-label english">Monthly Investment</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLang = 'it';
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+
+            if (lang === 'en') {
+                document.querySelectorAll('.italian').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.english').forEach(el => el.style.display = 'block');
+                document.querySelector('.lang-button[onclick="switchLanguage(\'en\')"]').classList.add('active');
+                document.querySelector('.lang-button[onclick="switchLanguage(\'it\')"]').classList.remove('active');
+            } else {
+                document.querySelectorAll('.italian').forEach(el => el.style.display = 'block');
+                document.querySelectorAll('.english').forEach(el => el.style.display = 'none');
+                document.querySelector('.lang-button[onclick="switchLanguage(\'it\')"]').classList.add('active');
+                document.querySelector('.lang-button[onclick="switchLanguage(\'en\')"]').classList.remove('active');
+            }
+        }
+
+        function toggleLanguage() {
+            switchLanguage(currentLang === 'en' ? 'it' : 'en');
+        }
+
+        // Shortcut Ctrl+L
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'l') {
+                e.preventDefault();
+                toggleLanguage();
+            }
+        });
+
+        // Function to navigate to marketing page with current language
+        function goToMarketing() {
+            window.location.href = 'marketing-overview.html?lang=' + currentLang;
+        }
+
+        // Inizializza lingua basata su parametro URL o default italiano
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const langParam = urlParams.get('lang');
+            switchLanguage(langParam || 'it');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landoor Marketing Excellence - Acquisition Presentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #ffffff;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            cursor: pointer;
+            height: 40px;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: #333333;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(107, 114, 128, 0.1);
+            color: #6b7280;
+        }
+
+        .lang-toggle {
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-button {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 1px solid #d1d5db;
+            background: transparent;
+            color: #333333;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .lang-button.active {
+            background: #6b7280;
+            border-color: #6b7280;
+            color: #ffffff;
+        }
+
+        /* Language content styling */
+        .hidden { display: none; }
+
+        /* Pillar expansion system */
+        .pillar-container {
+            margin-bottom: 30px;
+        }
+
+        .pillar-card {
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .pillar-card:hover {
+            background: rgba(107, 114, 128, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .expand-arrow {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 20px;
+            color: #6b7280;
+            transition: transform 0.3s;
+        }
+
+        .pillar-card.expanded .expand-arrow {
+            transform: rotate(180deg);
+        }
+
+        .pillar-details {
+            background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%);
+            border-radius: 0 0 15px 15px;
+            padding: 30px;
+            margin-top: 10px;
+            border-left: 4px solid #6b7280;
+            border-right: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
+            animation: slideDown 0.3s ease-out;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .detail-section h3 {
+            color: #333333;
+            font-size: 1.5em;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #6b7280;
+            padding-bottom: 10px;
+        }
+
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .activity-icon {
+            font-size: 24px;
+            margin-top: 5px;
+        }
+
+        .activity-item h4 {
+            color: #333333;
+            font-size: 1.1em;
+            margin: 0 0 10px 0;
+            font-weight: 600;
+        }
+
+        .activity-item p {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Page system */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 80px 20px 40px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .hero-title {
+            font-size: clamp(32px, 6vw, 64px);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #333333 0%, #6b7280 50%, #9ca3af 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(16px, 3vw, 20px);
+            color: #6b7280;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: rgba(243, 244, 246, 0.8);
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            background: rgba(107, 114, 128, 0.15);
+            transform: translateY(-5px);
+            border-color: #6b7280;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #6b7280;
+            display: block;
+        }
+
+        .stat-label {
+            color: #6b7280;
+            margin-top: 10px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Sectors Grid */
+        .sectors-section {
+            margin: 60px 0;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: clamp(28px, 5vw, 36px);
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            color: #6b7280;
+            font-size: 18px;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .sectors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .sector-card {
+            background: rgba(243, 244, 246, 0.8);
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 4px solid #6b7280;
+            transition: all 0.3s;
+        }
+
+        .sector-card:hover {
+            background: rgba(107, 114, 128, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .sector-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .sector-icon {
+            font-size: 28px;
+            margin-right: 15px;
+        }
+
+        .sector-title {
+            color: #333333;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0 0 5px 0;
+        }
+
+        .sector-contacts {
+            color: #6b7280;
+            font-size: 13px;
+            margin: 0;
+        }
+
+        .sector-description {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Results Grid */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        /* Pillar specific grid - horizontal layout */
+        .results-grid.pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, rgba(107, 114, 128, 0.1) 0%, rgba(156, 163, 175, 0.1) 100%);
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 25px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+            border-color: #6b7280;
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #6b7280 0%, #9ca3af 100%);
+            border-radius: 15px 15px 0 0;
+        }
+
+        .result-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .result-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333333;
+        }
+
+        .result-metric {
+            font-size: 28px;
+            font-weight: 700;
+            color: #6b7280;
+            margin-bottom: 10px;
+        }
+
+        .result-detail {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        /* Button */
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #6b7280 0%, #9ca3af 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(107, 114, 128, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-center {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 20px;
+            }
+
+            .sectors-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .results-grid.pillar-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .page {
+                padding: 100px 15px 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <div class="logo" onclick="showPage('overview')">
+                <img src="logo.jpg" alt="Landoor">
+            </div>
+            <div class="nav-center">
+                <a class="nav-link active" onclick="showPage('overview')">
+                    <span class="en-content">Marketing Highlights</span>
+                    <span class="it-content hidden">Risultati Marketing</span>
+                </a>
+                <a class="nav-link" onclick="showPage('program')">
+                    <span class="en-content">Marketing Program</span>
+                    <span class="it-content hidden">Programma Marketing</span>
+                </a>
+                <a class="nav-link" onclick="showPage('calendar')">
+                    <span class="en-content">Strategic Calendar</span>
+                    <span class="it-content hidden">Calendario Strategico</span>
+                </a>
+                <a class="nav-link" onclick="showPage('alignment')">
+                    <span class="en-content">Sales Alignment</span>
+                    <span class="it-content hidden">Allineamento Sales</span>
+                </a>
+                <a class="nav-link" onclick="showPage('profile')">
+                    <span class="en-content">Industry Expert</span>
+                    <span class="it-content hidden">Esperto Settore</span>
+                </a>
+            </div>
+            <div class="lang-toggle">
+                <button class="lang-button active" onclick="switchLanguage('en')">EN</button>
+                <button class="lang-button" onclick="switchLanguage('it')">IT</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Page - Marketing Highlights -->
+    <div class="page active" id="overview">
+        <div class="container">
+            <div class="hero">
+                <h1 class="hero-title">
+                    <span class="en-content">Strategic Marketing Intelligence</span>
+                    <span class="it-content hidden">Intelligence Marketing Strategico</span>
+                </h1>
+                <p class="hero-subtitle">
+                    <span class="en-content">Systematic approach to market intelligence, sales alignment, and business development delivering measurable results</span>
+                    <span class="it-content hidden">Approccio sistematico a intelligence di mercato, allineamento sales e sviluppo business con risultati misurabili</span>
+                </p>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">📊</span>
+                        <div class="stat-label">
+                            <span class="en-content">Marketing Program</span>
+                            <span class="it-content hidden">Programma Marketing</span>
+                        </div>
+                        <p style="font-size: 12px; color: #6b7280; margin-top: 5px;">
+                            <span class="en-content">3-pillar strategic framework</span>
+                            <span class="it-content hidden">Framework strategico 3 pilastri</span>
+                        </p>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">📅</span>
+                        <div class="stat-label">
+                            <span class="en-content">Strategic Calendar</span>
+                            <span class="it-content hidden">Calendario Strategico</span>
+                        </div>
+                        <p style="font-size: 12px; color: #6b7280; margin-top: 5px;">
+                            <span class="en-content">Systematic campaign planning</span>
+                            <span class="it-content hidden">Pianificazione sistematica campagne</span>
+                        </p>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">🤝</span>
+                        <div class="stat-label">
+                            <span class="en-content">Sales Alignment</span>
+                            <span class="it-content hidden">Allineamento Sales</span>
+                        </div>
+                        <p style="font-size: 12px; color: #6b7280; margin-top: 5px;">
+                            <span class="en-content">Intelligence sharing & coordination</span>
+                            <span class="it-content hidden">Condivisione intelligence & coordinamento</span>
+                        </p>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">🎯</span>
+                        <div class="stat-label">
+                            <span class="en-content">Industry Expertise</span>
+                            <span class="it-content hidden">Expertise Settoriale</span>
+                        </div>
+                        <p style="font-size: 12px; color: #6b7280; margin-top: 5px;">
+                            <span class="en-content">20+ years market knowledge</span>
+                            <span class="it-content hidden">20+ anni conoscenza mercato</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Premium Sectors Section -->
+            <div class="sectors-section">
+                <h2 class="section-title">
+                    <span class="en-content">Strategic Marketing Framework</span>
+                    <span class="it-content hidden">Framework Marketing Strategico</span>
+                </h2>
+                <p class="section-subtitle">
+                    <span class="en-content">Comprehensive approach to market intelligence, business development, and sales optimization</span>
+                    <span class="it-content hidden">Approccio completo a intelligence di mercato, sviluppo business e ottimizzazione sales</span>
+                </p>
+
+                <div class="sectors-grid">
+                    <div class="sector-card" onclick="showPage('program')" style="cursor: pointer;">
+                        <div class="sector-header">
+                            <div class="sector-icon">📊</div>
+                            <div>
+                                <h3 class="sector-title">
+                                    <span class="en-content">Marketing Program</span>
+                                    <span class="it-content hidden">Programma Marketing</span>
+                                </h3>
+                                <p class="sector-contacts">
+                                    <span class="en-content">3-Pillar Framework</span>
+                                    <span class="it-content hidden">Framework 3 Pilastri</span>
+                                </p>
+                            </div>
+                        </div>
+                        <p class="sector-description">
+                            <span class="en-content">Brand values, sector verticalization, AI positioning strategy</span>
+                            <span class="it-content hidden">Valori brand, verticalizzazione settori, strategia posizionamento IA</span>
+                        </p>
+                    </div>
+
+                    <div class="sector-card" onclick="showPage('calendar')" style="cursor: pointer;">
+                        <div class="sector-header">
+                            <div class="sector-icon">📅</div>
+                            <div>
+                                <h3 class="sector-title">
+                                    <span class="en-content">Strategic Calendar</span>
+                                    <span class="it-content hidden">Calendario Strategico</span>
+                                </h3>
+                                <p class="sector-contacts">
+                                    <span class="en-content">25+ Campaigns</span>
+                                    <span class="it-content hidden">25+ Campagne</span>
+                                </p>
+                            </div>
+                        </div>
+                        <p class="sector-description">
+                            <span class="en-content">Trade show coordination, campaign planning, systematic execution</span>
+                            <span class="it-content hidden">Coordinamento fiere, pianificazione campagne, esecuzione sistematica</span>
+                        </p>
+                    </div>
+
+                    <div class="sector-card" onclick="showPage('alignment')" style="cursor: pointer;">
+                        <div class="sector-header">
+                            <div class="sector-icon">🤝</div>
+                            <div>
+                                <h3 class="sector-title">
+                                    <span class="en-content">Sales Alignment</span>
+                                    <span class="it-content hidden">Allineamento Sales</span>
+                                </h3>
+                                <p class="sector-contacts">
+                                    <span class="en-content">Weekly Intelligence</span>
+                                    <span class="it-content hidden">Intelligence Settimanale</span>
+                                </p>
+                            </div>
+                        </div>
+                        <p class="sector-description">
+                            <span class="en-content">Intelligence sharing, lead qualification, workflow optimization</span>
+                            <span class="it-content hidden">Condivisione intelligence, qualificazione lead, ottimizzazione flussi</span>
+                        </p>
+                    </div>
+
+                    <div class="sector-card" onclick="showPage('profile')" style="cursor: pointer;">
+                        <div class="sector-header">
+                            <div class="sector-icon">🎯</div>
+                            <div>
+                                <h3 class="sector-title">
+                                    <span class="en-content">Industry Expertise</span>
+                                    <span class="it-content hidden">Expertise Settoriale</span>
+                                </h3>
+                                <p class="sector-contacts">
+                                    <span class="en-content">20+ Years Experience</span>
+                                    <span class="it-content hidden">20+ Anni Esperienza</span>
+                                </p>
+                            </div>
+                        </div>
+                        <p class="sector-description">
+                            <span class="en-content">Market knowledge, network development, strategic positioning</span>
+                            <span class="it-content hidden">Conoscenza mercato, sviluppo network, posizionamento strategico</span>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Results Grid -->
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-icon">🎯</div>
+                    <div class="result-title">
+                        <span class="en-content">AI Positioning</span>
+                        <span class="it-content hidden">Posizionamento IA</span>
+                    </div>
+                    <div class="result-metric">15,000+</div>
+                    <div class="result-detail">
+                        <span class="en-content">Reach across Italian translation market with AI positioning campaigns</span>
+                        <span class="it-content hidden">Reach attraverso mercato traduzioni italiano con campagne posizionamento IA</span>
+                    </div>
+                    <div class="result-detail">
+                        <span class="en-content">• "Human-in-the-Cockpit" webinar<br>• 4-part AI risk mitigation series<br>• AI Week Milano presence</span>
+                        <span class="it-content hidden">• Webinar "Human-in-the-Cockpit"<br>• Serie mitigazione rischi IA in 4 parti<br>• Presenza AI Week Milano</span>
+                    </div>
+                </div>
+
+
+                <div class="result-card">
+                    <div class="result-icon">🎪</div>
+                    <div class="result-title">
+                        <span class="en-content">Campaign Performance</span>
+                        <span class="it-content hidden">Performance Campagne</span>
+                    </div>
+                    <div class="result-metric">18%</div>
+                    <div class="result-detail">
+                        <span class="en-content">Peak CTR achieved with Berlitz Clienti Attivi campaign (industry benchmark: 2-3%)</span>
+                        <span class="it-content hidden">CTR massimo raggiunto con campagna Berlitz Clienti Attivi (benchmark settore: 2-3%)</span>
+                    </div>
+                    <div class="result-detail">
+                        <span class="en-content">• Webinar Landoor: 13.25% CTR<br>• Door24 Campaign: 7.33% CTR<br>• TUTTOFOOD: 21.93% CTR (English)</span>
+                        <span class="it-content hidden">• Webinar Landoor: 13,25% CTR<br>• Campagna Door24: 7,33% CTR<br>• TUTTOFOOD: 21,93% CTR (Inglese)</span>
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <div class="result-icon">👥</div>
+                    <div class="result-title">
+                        <span class="en-content">Relationship-Driven Differentiation</span>
+                        <span class="it-content hidden">Differenziazione Guidata da Relazioni</span>
+                    </div>
+                    <div class="result-metric">Consultant</div>
+                    <div class="result-detail">
+                        <span class="en-content">Landoor's strategic differentiator: each Project Manager functions as a true consultant, not just a service provider</span>
+                        <span class="it-content hidden">Differenziatore strategico Landoor: ogni Project Manager funziona come vero consulente, non solo fornitore servizi</span>
+                    </div>
+                    <div class="result-detail">
+                        <span class="en-content">• Personal connections drive premium pricing<br>• Trust-building approach ensures client retention<br>• Consultative model differentiates from commodity suppliers</span>
+                        <span class="it-content hidden">• Connessioni personali guidano pricing premium<br>• Approccio costruzione fiducia assicura retention clienti<br>• Modello consultivo differenzia da fornitori commodity</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Marketing Program Page -->
+    <div class="page" id="program">
+        <div class="container">
+            <div class="hero">
+                <h1 class="hero-title">
+                    <span class="en-content">Strategic Marketing Program</span>
+                    <span class="it-content hidden">Programma Marketing Strategico</span>
+                </h1>
+                <p class="hero-subtitle">
+                    <span class="en-content">Three strategic pillars driving Italian translation market leadership</span>
+                    <span class="it-content hidden">Tre pillar strategici per la leadership del mercato italiano delle traduzioni</span>
+                </p>
+            </div>
+
+            <div class="results-grid pillar-grid">
+                <div class="pillar-container">
+                    <div class="result-card pillar-card" onclick="togglePillar(1)">
+                        <div class="result-icon">💎</div>
+                        <div class="result-title">
+                            <span class="en-content">PILLAR 1: Brand Values & Quality</span>
+                            <span class="it-content hidden">PILLAR 1: Valori Brand & Qualità</span>
+                        </div>
+                        <div class="result-metric">CSR + Quality</div>
+                        <div class="result-detail">
+                            <span class="en-content">Brand communication foundation: Corporate Social Responsibility, quality certifications, human relationships with clients and translators. This cross-functional approach spans communication, project management, sales teams at all levels.</span>
+                            <span class="it-content hidden">Base comunicazione brand: Responsabilità Sociale Corporativa, certificazioni qualità, relazioni umane con clienti e traduttori. Approccio trasversale che coinvolge comunicazione, project management, team sales a tutti i livelli.</span>
+                        </div>
+                        <div class="expand-arrow">▼</div>
+                    </div>
+
+                    <div class="pillar-details" id="pillar1-details" style="display: none;">
+                        <div class="detail-section">
+                            <h3>
+                                <span class="en-content">2025 Key Activities & Results</span>
+                                <span class="it-content hidden">Attività Chiave & Risultati 2025</span>
+                            </h3>
+
+                            <div class="activity-grid">
+                                <div class="activity-item">
+                                    <div class="activity-icon">🏆</div>
+                                    <div>
+                                        <h4>
+                                            <span class="en-content">Excellence Certified: ISO Audits Passed</span>
+                                            <span class="it-content hidden">Eccellenza Certificata: Audit ISO Superati</span>
+                                        </h4>
+                                        <p>
+                                            <span class="en-content">Zero non-conformities. 6 ISO certifications maintained: ISO 9001, ISO 17100, ISO 23155, ISO 27001, ISO 18587, UNI PDR/125 Gender Equality.</span>
+                                            <span class="it-content hidden">Zero non conformità. 6 certificazioni ISO mantenute: ISO 9001, ISO 17100, ISO 23155, ISO 27001, ISO 18587, UNI PDR/125 Parità di Genere.</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="activity-item">
+                                    <div class="activity-icon">🥇</div>
+                                    <div>
+                                        <h4>
+                                            <span class="en-content">Gender Equality Award Winner</span>
+                                            <span class="it-content hidden">Premio Parità di Genere Vinto</span>
+                                        </h4>
+                                        <p>
+                                            <span class="en-content">Best Small Enterprise award from Lombardy Region Council for Equal Opportunities. 35 years of gender equity commitment recognized.</span>
+                                            <span class="it-content hidden">Premio Migliore Piccola Impresa dal Consiglio Pari Opportunità Regione Lombardia. 35 anni di impegno per l'equità di genere riconosciuti.</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="activity-item">
+                                    <div class="activity-icon">🌱</div>
+                                    <div>
+                                        <h4>
+                                            <span class="en-content">Weldoor® Wellness Program</span>
+                                            <span class="it-content hidden">Programma Benessere Weldoor®</span>
+                                        </h4>
+                                        <p>
+                                            <span class="en-content">Outdoor team activities, green spaces integration, +30% productivity with workplace wellness. Garden meetings at Copernico Hub Milano.</span>
+                                            <span class="it-content hidden">Attività team outdoor, integrazione spazi verdi, +30% produttività con benessere lavorativo. Riunioni in giardino al Copernico Hub Milano.</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="activity-item">
+                                    <div class="activity-icon">🤝</div>
+                                    <div>
+                                        <h4>
+                                            <span class="en-content">Strategic Partnership & Networking</span>
+                                            <span class="it-content hidden">Partnership Strategiche & Networking</span>
+                                        </h4>
+                                        <p>
+                                            <span class="en-content">CCI France Italy networking, professional collaboration events, international relationship building with focus on cultural mediation.</span>
+                                            <span class="it-content hidden">Networking CCI France Italy, eventi collaborazione professionale, costruzione relazioni internazionali con focus mediazione culturale.</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pillar-container">
+                    <div class="result-card pillar-card" onclick="togglePillar(2)">
+                        <div class="result-icon">🎯</div>
+                        <div class="result-title">
+                            <span class="en-content">PILLAR 2: Sector Verticalization</span>
+                            <span class="it-content hidden">PILLAR 2: Verticalizzazione Settori</span>
+                        </div>
+                        <div class="result-metric">6 Sectors</div>
+                        <div class="result-detail">
+                            <span class="en-content">Deep specialization in key Italian premium sectors: Fashion & Luxury, Pharma & Healthcare, Design & Architecture, Food & Beverage, Beauty & Cosmetics, Technology & AI. Vertical marketing campaigns and strategic trade show presence.</span>
+                            <span class="it-content hidden">Specializzazione approfondita in settori premium italiani chiave: Fashion & Luxury, Pharma & Healthcare, Design & Architettura, Food & Beverage, Beauty & Cosmetica, Technology & AI. Campagne marketing verticali e presenza strategica fiere.</span>
+                        </div>
+                        <div class="expand-arrow">▼</div>
+                    </div>
+
+                    <div class="pillar-details" id="pillar2-details" style="display: none;">
+                        <div class="detail-section">
+                            <h3>
+                                <span class="en-content">2025 Sector Campaigns & Trade Shows</span>
+                                <span class="it-content hidden">Campagne Settoriali & Fiere 2025</span>
+                            </h3>
+
+                            <div class="activity-grid">
+                                <div class="activity-item">
+                                    <div class="activity-icon">👗</div>
+                                    <div>
+                                        <h4>
+                                            <span class="en-content">Fashion & Luxury Excellence</span>
+                                            <span class="it-content hidden">Eccellenza Fashion & Luxury</span>
+                                        </h4>
+                                        <p>
+                                            <span class="en-content">"EMOTIONS crossing continents" campaign. STYLE challenge in multiple languages. Milano Fashion Week networking, 30+ years with fashion big brands.</span>
+                                            <span class="it-content hidden">Campagna "EMOZIONI che attraversano i continenti". Sfida STILE in lingue multiple. Networking Milano Fashion Week, 30+ anni con big della moda.</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="activity-item">
+                                    <div class="activity-icon">💊</div>
+                                    <div>
+                                        <h4>
+                                            <span class="en-content">Pharma Life-Critical Translations</span>
+                                            <span class="it-content hidden">Traduzioni Farmaceutiche Salvavita</span>
+                                        </h4>
+                                        <p>
+                                            <span class="en-content">Drug leaflet translations that "save lives". 30 years in pharmaceutical sector. Every word counts, every number can be decisive in healthcare outcomes.</span>
+                                            <span class="it-content hidden">Traduzioni bugiardini che "salvano vite". 30 anni nel farmaceutico. Ogni parola conta, ogni numero può essere decisivo per la salute.</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="activity-item">
+                                    <div class="activity-icon">🏬</div>
+                                    <div>
+                                        <h4>
+                                            <span class="en-content">MARCA 2025 Private Label Focus</span>
+                                            <span class="it-content hidden">MARCA 2025 Focus Private Label</span>
+                                        </h4>
+                                        <p>
+                                            <span class="en-content">Barbara Borsani and Giada Manni representing Landoor solutions. AI-powered localization saving up to 30% costs for Italian and international brands.</span>
+                                            <span class="it-content hidden">Barbara Borsani e Giada Manni rappresentano soluzioni Landoor. Localizzazione potenziata IA con risparmio fino 30% costi per brand italiani e internazionali.</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="activity-item">
+                                    <div class="activity-icon">📊</div>
+                                    <div>
+                                        <h4>
+                                            <span class="en-content">Brevo Campaign Performance 2025</span>
+                                            <span class="it-content hidden">Performance Campagne Brevo 2025</span>
+                                        </h4>
+                                        <p>
+                                            <span class="en-content">25 sector-specific campaigns: TUTTOFOOD (57% open rate, 20% CTR), Fashion clients (48% open rate), COSMOPROF (54% open rate), MIDO/Arab Health (49-50% open rates). Targeted trade show campaigns driving qualified leads.</span>
+                                            <span class="it-content hidden">25 campagne settoriali specifiche: TUTTOFOOD (57% tasso apertura, 20% CTR), Fashion clienti (48% apertura), COSMOPROF (54% apertura), MIDO/Arab Health (49-50% tassi apertura). Campagne fiere mirate generando lead qualificati.</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pillar-container">
+                    <div class="result-card pillar-card" onclick="togglePillar(3)">
+                        <div class="result-icon">🤖</div>
+                        <div class="result-title">
+                            <span class="en-content">PILLAR 3: AI Positioning</span>
+                            <span class="it-content hidden">PILLAR 3: Posizionamento IA</span>
+                        </div>
+                        <div class="result-metric">AI Expert</div>
+                        <div class="result-detail">
+                            <span class="en-content">Strategic positioning as AI translation experts: integration of AI in translation processes, demonstrating that AI enhances rather than diminishes service quality. Consistent communication campaigns aligned with this positioning.</span>
+                            <span class="it-content hidden">Posizionamento strategico come esperti traduzione IA: integrazione IA nei processi traduttivi, dimostrando che IA migliora invece di peggiorare la qualità servizio. Campagne comunicazione coerenti con questo posizionamento.</span>
+                        </div>
+                        <div class="expand-arrow">▼</div>
+                    </div>
+
+                    <div class="pillar-details" id="pillar3-details" style="display: none;">
+                        <div class="detail-section">
+                            <h3>
+                                <span class="en-content">2025 AI Leadership & Innovation</span>
+                                <span class="it-content hidden">Leadership & Innovazione IA 2025</span>
+                            </h3>
+
+                            <div class="activity-grid">
+                                <div class="activity-item">
+                                    <div class="activity-icon">🎓</div>
+                                    <div>
+                                        <h4>
+                                            <span class="en-content">Human-in-the-Cockpit Webinar Series</span>
+                                            <span class="it-content hidden">Serie Webinar Human-in-the-Cockpit</span>
+                                        </h4>
+                                        <p>
+                                            <span class="en-content">Adele Nardulli speaking at ICoN University, GALA 2025 Montreal, TradInFo conferences. "Linguists are the SOLUTION, not the problem" messaging.</span>
+                                            <span class="it-content hidden">Adele Nardulli speaker a Università ICoN, GALA 2025 Montreal, conferenze TradInFo. Messaggio "I linguisti sono la SOLUZIONE, non il problema".</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+
+                                <div class="activity-item">
+                                    <div class="activity-icon">🚀</div>
+                                    <div>
+                                        <h4>
+                                            <span class="en-content">AI Festival Milano & Industry Events</span>
+                                            <span class="it-content hidden">AI Festival Milano & Eventi Settore</span>
+                                        </h4>
+                                        <p>
+                                            <span class="en-content">AI WEEK 2025 participation showcasing human-AI collaboration. Positioning as technology-language intersection leaders, combining AI power with human creativity.</span>
+                                            <span class="it-content hidden">Partecipazione AI WEEK 2025 mostrando collaborazione umano-IA. Posizionamento come leader intersezione tecnologia-linguaggio, combinando potenza IA con creatività umana.</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="activity-item">
+                                    <div class="activity-icon">💡</div>
+                                    <div>
+                                        <h4>
+                                            <span class="en-content">"Pillole di AI" Content Series</span>
+                                            <span class="it-content hidden">Serie Contenuti "Pillole di AI"</span>
+                                        </h4>
+                                        <p>
+                                            <span class="en-content">Educational video series on AI advantages: OCR, recommendation systems, RAG technology. Consistent messaging on AI COLLABORATION vs substitution.</span>
+                                            <span class="it-content hidden">Serie video educativi vantaggi IA: OCR, sistemi raccomandazione, tecnologia RAG. Messaggio coerente COLLABORAZIONE IA vs sostituzione.</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero" style="padding: 20px 0; text-align: center;">
+                <p style="color: #6b7280; font-size: 16px; margin: 0;">
+                    <span class="en-content">Click on each pillar above to explore detailed activities and results from 2025</span>
+                    <span class="it-content hidden">Clicca su ogni pillar sopra per esplorare attività dettagliate e risultati del 2025</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="calendar">
+        <div class="container">
+            <div class="hero">
+                <h1 class="hero-title">
+                    <span class="en-content">Strategic Marketing Calendar</span>
+                    <span class="it-content hidden">Calendario Marketing Strategico</span>
+                </h1>
+                <p class="hero-subtitle">
+                    <span class="en-content">Synchronized campaigns aligned with Italian premium sector business cycles and trade show calendar</span>
+                    <span class="it-content hidden">Campagne sincronizzate allineate con cicli business settori premium italiani e calendario fiere</span>
+                </p>
+            </div>
+
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-icon">👗</div>
+                    <div class="result-title">
+                        <span class="en-content">Fashion Sector Campaigns</span>
+                        <span class="it-content hidden">Campagne Settore Fashion</span>
+                    </div>
+                    <div class="result-metric">Q1-Q3 2025</div>
+                    <div class="result-detail">
+                        <span class="en-content"><strong>Fashion clienti attivi 2025:</strong> ENG (100% delivery, 100% open rate) + ITA (48% open rate, 7% CTR). <strong>MIPEL Feb:</strong> 64% open rate. <strong>MIDO Feb:</strong> 50% open rate, 5% CTR. Targeted luxury brand networking.</span>
+                        <span class="it-content hidden"><strong>Fashion clienti attivi 2025:</strong> ENG (100% consegna, 100% apertura) + ITA (48% apertura, 7% CTR). <strong>MIPEL Feb:</strong> 64% apertura. <strong>MIDO Feb:</strong> 50% apertura, 5% CTR. Networking brand luxury mirato.</span>
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <div class="result-icon">💊</div>
+                    <div class="result-title">
+                        <span class="en-content">Pharma & Healthcare Calendar</span>
+                        <span class="it-content hidden">Calendario Pharma & Healthcare</span>
+                    </div>
+                    <div class="result-metric">Jan-Nov 2025</div>
+                    <div class="result-detail">
+                        <span class="en-content"><strong>Arab Health Jan:</strong> ENG (49% open rate, 3% CTR, 4.4K recipients) + ITA (47% open rate, 294 recipients). <strong>FIME Jun:</strong> 36% open rate, 5% CTR targeting international medical device companies.</span>
+                        <span class="it-content hidden"><strong>Arab Health Gen:</strong> ENG (49% apertura, 3% CTR, 4.4K destinatari) + ITA (47% apertura, 294 destinatari). <strong>FIME Giu:</strong> 36% apertura, 5% CTR targeting aziende dispositivi medici internazionali.</span>
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <div class="result-icon">💄</div>
+                    <div class="result-title">
+                        <span class="en-content">COSMOPROF Beauty Focus</span>
+                        <span class="it-content hidden">COSMOPROF Focus Beauty</span>
+                    </div>
+                    <div class="result-metric">March 2025</div>
+                    <div class="result-detail">
+                        <span class="en-content"><strong>COSMOPROF March:</strong> Domestic (50% open rate, 220 recipients) + International (54% open rate, 745 recipients). Bologna beauty industry networking, Italian cosmetic brand targeting.</span>
+                        <span class="it-content hidden"><strong>COSMOPROF Marzo:</strong> Nazionale (50% apertura, 220 destinatari) + Internazionale (54% apertura, 745 destinatari). Networking industria beauty Bologna, targeting brand cosmetici italiani.</span>
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <div class="result-icon">🍷</div>
+                    <div class="result-title">
+                        <span class="en-content">TUTTOFOOD Milano Results</span>
+                        <span class="it-content hidden">TUTTOFOOD Milano Risultati</span>
+                    </div>
+                    <div class="result-metric">May 2025</div>
+                    <div class="result-detail">
+                        <span class="en-content"><strong>Pre-Fiera:</strong> ITA (57% open rate, 10% CTR, 786 recipients) + ENG (61% open rate, 21% CTR, 207 recipients). <strong>Post-Fiera:</strong> ITA (48% open rate, 11% CTR) + ENG (49% open rate, 22% CTR). Premium Italian food export focus.</span>
+                        <span class="it-content hidden"><strong>Pre-Fiera:</strong> ITA (57% apertura, 10% CTR, 786 destinatari) + ENG (61% apertura, 21% CTR, 207 destinatari). <strong>Post-Fiera:</strong> ITA (48% apertura, 11% CTR) + ENG (49% apertura, 22% CTR). Focus export food italiano premium.</span>
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <div class="result-icon">🤝</div>
+                    <div class="result-title">
+                        <span class="en-content">Strategic Partnership Campaigns</span>
+                        <span class="it-content hidden">Campagne Partnership Strategiche</span>
+                    </div>
+                    <div class="result-metric">May-June 2025</div>
+                    <div class="result-detail">
+                        <span class="en-content"><strong>Berlitz Partnership:</strong> Active clients (55% open rate, 18% CTR, 3.3K recipients) + International prospects (50% open rate, 4% CTR, 10K recipients). <strong>Webinar Landoor:</strong> 65% open rate, 13% CTR, 5.4K recipients.</span>
+                        <span class="it-content hidden"><strong>Partnership Berlitz:</strong> Clienti attivi (55% apertura, 18% CTR, 3.3K destinatari) + Prospect internazionali (50% apertura, 4% CTR, 10K destinatari). <strong>Webinar Landoor:</strong> 65% apertura, 13% CTR, 5.4K destinatari.</span>
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <div class="result-icon">🌐</div>
+                    <div class="result-title">
+                        <span class="en-content">GO INTERNATIONAL Export</span>
+                        <span class="it-content hidden">GO INTERNATIONAL Export</span>
+                    </div>
+                    <div class="result-metric">September 2025</div>
+                    <div class="result-detail">
+                        <span class="en-content"><strong>Pre-Fiera GO INTERNATIONAL:</strong> 77% open rate (exceptional performance), 150 recipients, 2% unsubscribe rate. Focus on Italian SMEs internationalization, export market expansion strategies.</span>
+                        <span class="it-content hidden"><strong>Pre-Fiera GO INTERNATIONAL:</strong> 77% apertura (performance eccezionale), 150 destinatari, 2% disiscrizioni. Focus PMI italiane internazionalizzazione, strategie espansione mercati export.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="alignment">
+        <div class="container">
+            <div class="hero">
+                <h1 class="hero-title">
+                    <span class="en-content">Sales-Marketing Alignment</span>
+                    <span class="it-content hidden">Allineamento Sales-Marketing</span>
+                </h1>
+                <p class="hero-subtitle">
+                    <span class="en-content">Weekly coordination ensuring marketing intelligence directly supports existing sales team effectiveness</span>
+                    <span class="it-content hidden">Coordinamento settimanale assicurando che l'intelligence marketing supporti direttamente l'efficacia del team sales esistente</span>
+                </p>
+            </div>
+
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-icon">📋</div>
+                    <div class="result-title">
+                        <span class="en-content">Weekly Intelligence Sharing</span>
+                        <span class="it-content hidden">Condivisione Intelligence Settimanale</span>
+                    </div>
+                    <div class="result-metric">Strategic</div>
+                    <div class="result-detail">
+                        <span class="en-content">Structured weekly briefings providing sales team with pre-qualified leads, sector-specific intelligence, and decision-maker contact verification. Marketing intelligence directly enhances existing sales team capabilities.
+                        <br><br><strong>Weekly Meeting Activities:</strong>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li>Trade show strategic alignment with sales team</li>
+                            <li>Project analysis to extract real communication content (case studies, new services for website)</li>
+                            <li>Design marketing/sales workflow tools (latest: integrated task manager in Door24)</li>
+                            <li>Lead qualification review and sector intelligence updates</li>
+                        </ul></span>
+                        <span class="it-content hidden">Briefing settimanali strutturati fornendo al team sales lead pre-qualificati, intelligence settore-specifica e verifica contatti decision-maker. Intelligence marketing potenzia direttamente capacità team sales esistente.
+                        <br><br><strong>Attività Riunioni Settimanali:</strong>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li>Allineamento strategico fiere con team sales</li>
+                            <li>Analisi commesse per estrarre contenuti comunicazione reali (case study, nuovi servizi per sito web)</li>
+                            <li>Progettazione strumenti flusso lavoro marketing/sales (ultimo: task manager integrato in Door24)</li>
+                            <li>Revisione qualificazione lead e aggiornamenti intelligence settoriale</li>
+                        </ul></span>
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <div class="result-icon">🎪</div>
+                    <div class="result-title">
+                        <span class="en-content">Coordinated Trade Show Management</span>
+                        <span class="it-content hidden">Gestione Coordinata Fiere</span>
+                    </div>
+                    <div class="result-metric">4-Phase Process</div>
+                    <div class="result-detail">
+                        <span class="en-content"><strong>Phase 1:</strong> Database creation (exhibitor lists + sector-specific purchased databases). <strong>Phase 2:</strong> Pre-show email campaigns. <strong>Phase 3:</strong> Sales team on-site activities. <strong>Phase 4:</strong> Post-show email + one-to-one sales manager follow-up. Complete marketing-sales synchronization.</span>
+                        <span class="it-content hidden"><strong>Fase 1:</strong> Creazione database (liste espositori + database settoriali specifici acquistati). <strong>Fase 2:</strong> Campagne email pre-fiera. <strong>Fase 3:</strong> Attività team sales in fiera. <strong>Fase 4:</strong> Email post-fiera + follow-up one-to-one sales manager. Sincronizzazione completa marketing-sales.</span>
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <div class="result-icon">📊</div>
+                    <div class="result-title">
+                        <span class="en-content">Campaign-Sales Pipeline Integration</span>
+                        <span class="it-content hidden">Integrazione Pipeline Campagne-Sales</span>
+                    </div>
+                    <div class="result-metric">Real-time</div>
+                    <div class="result-detail">
+                        <span class="en-content">Marketing campaign results directly feeding sales pipeline with warm leads, engagement tracking, and conversion optimization. Trade show performance: Pre-show open rates 50-77%, post-show CTR up to 22%.</span>
+                        <span class="it-content hidden">Risultati campagne marketing alimentano direttamente pipeline sales con warm lead, tracking engagement e ottimizzazione conversioni. Performance fiere: Open rate pre-fiera 50-77%, CTR post-fiera fino al 22%.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero" style="padding: 40px 0;">
+                <h2 style="color: #333333; font-size: 2em; margin-bottom: 30px; text-align: center;">
+                    <span class="en-content">Trade Show Coordination Process</span>
+                    <span class="it-content hidden">Processo Coordinamento Fiere</span>
+                </h2>
+
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-icon">📊</div>
+                        <div class="result-title">
+                            <span class="en-content">Database Excellence</span>
+                            <span class="it-content hidden">Eccellenza Database</span>
+                        </div>
+                        <div class="result-metric">30K</div>
+                        <div class="result-detail">
+                            <span class="en-content">Total contacts: 10K qualified clients + 20K leads to qualify through systematic Brevo management<br>• 90% Italian qualified clients<br>• 50/50 Italian/English leads<br>• Sector-segmented targeting</span>
+                            <span class="it-content hidden">Contatti totali: 10K clienti qualificati + 20K lead da qualificare attraverso gestione sistematica Brevo<br>• 90% clienti qualificati italiani<br>• 50/50 lead italiani/inglesi<br>• Targeting segmentato per settore</span>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-icon">🎯</div>
+                        <div class="result-title">
+                            <span class="en-content">PRE-SHOW: Database & Targeting</span>
+                            <span class="it-content hidden">PRE-FIERA: Database & Targeting</span>
+                        </div>
+                        <div class="result-metric">Phase 1-2</div>
+                        <div class="result-detail">
+                            <span class="en-content">Marketing creates sector-specific databases combining exhibitor lists with purchased high-quality contact databases. Strategic email campaigns launch 2-3 weeks before each trade show with sector-tailored messaging. <strong>Results:</strong> 50-77% open rates, qualified prospect identification.</span>
+                            <span class="it-content hidden">Marketing crea database settore-specifici combinando liste espositori con database contatti di qualità acquistati. Campagne email strategiche 2-3 settimane prima di ogni fiera con messaggi settore-specifici. <strong>Risultati:</strong> 50-77% open rate, identificazione prospect qualificati.</span>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-icon">🤝</div>
+                        <div class="result-title">
+                            <span class="en-content">DURING SHOW: Sales Execution</span>
+                            <span class="it-content hidden">DURANTE FIERA: Esecuzione Sales</span>
+                        </div>
+                        <div class="result-metric">Phase 3</div>
+                        <div class="result-detail">
+                            <span class="en-content">Sales team equipped with pre-qualified prospect lists and marketing intelligence executes on-site networking, booth visits, and relationship building. Marketing provides real-time support and lead prioritization based on email engagement data.</span>
+                            <span class="it-content hidden">Team sales equipaggiato con liste prospect pre-qualificati e intelligence marketing esegue networking in loco, visite stand e costruzione relazioni. Marketing fornisce supporto real-time e prioritizzazione lead basata su dati engagement email.</span>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-icon">📈</div>
+                        <div class="result-title">
+                            <span class="en-content">POST-SHOW: Coordinated Follow-up</span>
+                            <span class="it-content hidden">POST-FIERA: Follow-up Coordinato</span>
+                        </div>
+                        <div class="result-metric">Phase 4</div>
+                        <div class="result-detail">
+                            <span class="en-content">Marketing launches post-show email campaigns while sales managers execute parallel one-to-one personalized outreach. Synchronized messaging ensures prospect receives coherent communication from both channels. <strong>Results:</strong> Up to 22% CTR on post-show campaigns.</span>
+                            <span class="it-content hidden">Marketing lancia campagne email post-fiera mentre sales manager eseguono outreach personalizzato one-to-one parallelo. Messaggi sincronizzati assicurano che prospect riceva comunicazione coerente da entrambi canali. <strong>Risultati:</strong> Fino al 22% CTR su campagne post-fiera.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="profile">
+        <div class="container">
+            <div class="hero">
+                <h1 class="hero-title">
+                    <span class="en-content">Strategic Marketing Consultant Profile</span>
+                    <span class="it-content hidden">Profilo Consulente Marketing Strategico</span>
+                </h1>
+                <p class="hero-subtitle">
+                    <span class="en-content">Claudio Negri - 20+ years Italian translation ecosystem expertise, driving Landoor's strategic positioning as market intelligence leader</span>
+                    <span class="it-content hidden">Claudio Negri - 20+ anni expertise ecosistema traduzioni italiano, guidando posizionamento strategico Landoor come leader intelligence mercato</span>
+                </p>
+            </div>
+
+            <div class="hero" style="padding: 40px 0;">
+                <h2 style="color: #333333; font-size: 2em; margin-bottom: 30px; text-align: center;">
+                    <span class="en-content">Landoor Strategic Marketing Leadership</span>
+                    <span class="it-content hidden">Leadership Marketing Strategico Landoor</span>
+                </h2>
+
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-icon">🎯</div>
+                        <div class="result-title">
+                            <span class="en-content">Landoor Marketing Architect</span>
+                            <span class="it-content hidden">Architetto Marketing Landoor</span>
+                        </div>
+                        <div class="result-metric">2022-2025</div>
+                        <div class="result-detail">
+                            <span class="en-content"><strong>Strategic Marketing Consultant (3 years):</strong> Designed and executed comprehensive marketing program generating 30K database, 25+ sector-specific campaigns, 50-77% email open rates. Architect of 3-pillar strategy: Brand Values/Quality, Sector Verticalization, AI Positioning. Coordinated marketing-sales alignment delivering measurable ROI across trade show calendar.</span>
+                            <span class="it-content hidden"><strong>Consulente Marketing Strategico (3 anni):</strong> Progettato ed eseguito programma marketing completo generando 30K database, 25+ campagne settore-specifiche, 50-77% open rate email. Architetto strategia 3-pillar: Valori Brand/Qualità, Verticalizzazione Settori, Posizionamento AI. Coordinato allineamento marketing-sales generando ROI misurabili attraverso calendario fieristico.</span>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-icon">📈</div>
+                        <div class="result-title">
+                            <span class="en-content">Performance-Driven Results</span>
+                            <span class="it-content hidden">Risultati Performance-Driven</span>
+                        </div>
+                        <div class="result-metric">Measurable Impact</div>
+                        <div class="result-detail">
+                            <span class="en-content"><strong>Brevo Campaign Excellence:</strong> GO INTERNATIONAL 77% open rate, TUTTOFOOD 22% CTR, Fashion sector 100% delivery rate ENG campaigns. <strong>Trade Show Coordination:</strong> 4-phase process (database creation, pre-show campaigns, sales execution, coordinated follow-up) driving qualified lead generation across 20+ annual events.</span>
+                            <span class="it-content hidden"><strong>Eccellenza Campagne Brevo:</strong> GO INTERNATIONAL 77% apertura, TUTTOFOOD 22% CTR, settore Fashion 100% consegna campagne ENG. <strong>Coordinamento Fiere:</strong> Processo 4-fasi (creazione database, campagne pre-fiera, esecuzione sales, follow-up coordinato) generando lead qualificati attraverso 20+ eventi annuali.</span>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-icon">🧠</div>
+                        <div class="result-title">
+                            <span class="en-content">AI Strategy Integration</span>
+                            <span class="it-content hidden">Integrazione Strategia AI</span>
+                        </div>
+                        <div class="result-metric">Innovation Leader</div>
+                        <div class="result-detail">
+                            <span class="en-content"><strong>AI Positioning Expertise:</strong> Developed "Human-in-the-Cockpit" messaging, "Pillole di AI" content series. Strategic positioning of AI as collaboration tool vs substitution, strengthening Landoor's tech leadership while preserving human value.</span>
+                            <span class="it-content hidden"><strong>Expertise Posizionamento AI:</strong> Sviluppato messaging "Human-in-the-Cockpit", serie contenuti "Pillole di AI". Posizionamento strategico AI come strumento collaborazione vs sostituzione, rafforzando leadership tech Landoor preservando valore umano.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero" style="padding: 40px 0;">
+                <h2 style="color: #333333; font-size: 2em; margin-bottom: 30px; text-align: center;">
+                    <span class="en-content">Italian Translation Market Intelligence</span>
+                    <span class="it-content hidden">Intelligence Mercato Traduzioni Italiano</span>
+                </h2>
+
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-icon">🏢</div>
+                        <div class="result-title">
+                            <span class="en-content">Trans-Edit Group: Technology Pioneer</span>
+                            <span class="it-content hidden">Trans-Edit Group: Pioniere Tecnologia</span>
+                        </div>
+                        <div class="result-metric">2012-2018</div>
+                        <div class="result-detail">
+                            <span class="en-content"><strong>Web Manager (5+ years):</strong> Brand development, SEO/SEM strategies, content marketing. <strong>Technology R&D:</strong> TMS systems (Plunet, MS Dynamics), CAT tools (SDL Studio, MemoQ, MemSource), MT technologies (Moses, Neural MT). <strong>EXPO 2015 Partnership:</strong> International expansion catalyst opening Dubai and London offices.</span>
+                            <span class="it-content hidden"><strong>Web Manager (5+ anni):</strong> Sviluppo brand, strategie SEO/SEM, content marketing. <strong>R&D Tecnologia:</strong> Sistemi TMS (Plunet, MS Dynamics), CAT tools (SDL Studio, MemoQ, MemSource), tecnologie MT (Moses, Neural MT). <strong>Partnership EXPO 2015:</strong> Catalizzatore espansione internazionale apertura uffici Dubai e Londra.</span>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-icon">🌟</div>
+                        <div class="result-title">
+                            <span class="en-content">Way2Global: Marketing Excellence</span>
+                            <span class="it-content hidden">Way2Global: Eccellenza Marketing</span>
+                        </div>
+                        <div class="result-metric">2018-2020</div>
+                        <div class="result-detail">
+                            <span class="en-content"><strong>Marketing & Innovation Manager + CSR Specialist:</strong> Led team (graphic designers, social media managers, copywriters). <strong>Brand Transformation:</strong> Corporate rebranding, 120% brand awareness, double SEO results. <strong>CSR Leadership:</strong> Green Translations project, carbon neutrality achievement. <strong>Award:</strong> "Genius and Enterprise" Chamber of Commerce Milan.</span>
+                            <span class="it-content hidden"><strong>Marketing & Innovation Manager + CSR Specialist:</strong> Guidato team (graphic designer, social media manager, copywriter). <strong>Trasformazione Brand:</strong> Rebranding corporate, 120% brand awareness, doppi risultati SEO. <strong>Leadership CSR:</strong> Progetto Green Translations, raggiungimento carbon neutrality. <strong>Premio:</strong> "Genius and Enterprise" Camera Commercio Milano.</span>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-icon">🎯</div>
+                        <div class="result-title">
+                            <span class="en-content">Globe Group: CRM Innovation</span>
+                            <span class="it-content hidden">Globe Group: Innovazione CRM</span>
+                        </div>
+                        <div class="result-metric">2020-2022</div>
+                        <div class="result-detail">
+                            <span class="en-content"><strong>Marketing & Telemarketing Manager:</strong> Led Customer Relationship Management project, marketing-sales alignment supervision. <strong>Marketing Automation:</strong> Funnel planning, telemarketing team training, script optimization. <strong>Data-Driven Approach:</strong> CRM integration, improved response rates, brand coherence across communication materials.</span>
+                            <span class="it-content hidden"><strong>Marketing & Telemarketing Manager:</strong> Guidato progetto Customer Relationship Management, supervisione allineamento marketing-sales. <strong>Marketing Automation:</strong> Pianificazione funnel, formazione team telemarketing, ottimizzazione script. <strong>Approccio Data-Driven:</strong> Integrazione CRM, miglioramento tassi risposta, coerenza brand attraverso materiali comunicazione.</span>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-icon">🤖</div>
+                        <div class="result-title">
+                            <span class="en-content">Nexo Corporation: AI Suite Development</span>
+                            <span class="it-content hidden">Nexo Corporation: Sviluppo AI Suite</span>
+                        </div>
+                        <div class="result-metric">2022-2024</div>
+                        <div class="result-detail">
+                            <span class="en-content"><strong>External Marketing Consultant:</strong> Strategic marketing plans, CEO/management collaboration. <strong>Product Brand Development:</strong> Tradoo and Nexo AI Suite positioning, sustainability partnerships. <strong>New Business Development:</strong> Workflow creation, social media editorial planning, international trade fair events support.</span>
+                            <span class="it-content hidden"><strong>Consulente Marketing Esterno:</strong> Piani marketing strategici, collaborazione CEO/management. <strong>Sviluppo Brand Prodotto:</strong> Posizionamento Tradoo e Nexo AI Suite, partnership sostenibilità. <strong>Sviluppo New Business:</strong> Creazione workflow, pianificazione editoriale social media, supporto eventi fieristici internazionali.</span>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-icon">🎓</div>
+                        <div class="result-title">
+                            <span class="en-content">Academic & Industry Authority</span>
+                            <span class="it-content hidden">Autorità Accademica & Settoriale</span>
+                        </div>
+                        <div class="result-metric">Knowledge Transfer</div>
+                        <div class="result-detail">
+                            <span class="en-content"><strong>Civica Scuola Interpreti e Traduttori Altiero Spinelli:</strong> Marketing lecturer (Feb-Jul 2022). <strong>Curriculum:</strong> Business and Marketing Plan development, KPIs analysis, Target Group and Buyer Personas, practical communication strategies. <strong>SOGET Era:</strong> Multimedia translation projects, SEO/SEM planning, crowd dubbing platforms analysis (2002-2012).</span>
+                            <span class="it-content hidden"><strong>Civica Scuola Interpreti e Traduttori Altiero Spinelli:</strong> Docente marketing (Feb-Lug 2022). <strong>Curriculum:</strong> Sviluppo Business e Marketing Plan, analisi KPI, Target Group e Buyer Personas, strategie comunicazione pratiche. <strong>Era SOGET:</strong> Progetti traduzione multimediale, pianificazione SEO/SEM, analisi piattaforme crowd dubbing (2002-2012).</span>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-icon">💎</div>
+                        <div class="result-title">
+                            <span class="en-content">Strategic Asset Value</span>
+                            <span class="it-content hidden">Valore Asset Strategico</span>
+                        </div>
+                        <div class="result-metric">Irreplaceable Intelligence</div>
+                        <div class="result-detail">
+                            <span class="en-content"><strong>22+ Years Italian Translation Ecosystem:</strong> Complete market coverage from technology foundation (SOGET multimedia projects) to AI innovation (Nexo AI Suite). <strong>Competitive Intelligence:</strong> Relationship mapping across all major Italian agencies cannot be rebuilt. <strong>Strategic Consultant Model:</strong> Knowledge retention + competitive advantage protection = sustainable growth foundation for American parent company expansion.</span>
+                            <span class="it-content hidden"><strong>22+ anni ecosistema traduzioni italiano:</strong> Copertura mercato completa da fondazioni tecnologia (progetti multimediali SOGET) a innovazione AI (Nexo AI Suite). <strong>Intelligence Competitiva:</strong> Mappatura relazioni attraverso tutte le principali agenzie italiane non ricostruibile. <strong>Modello Consulente Strategico:</strong> Retention conoscenza + protezione vantaggi competitivi = fondazione crescita sostenibile per espansione parent company americana.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLang = 'en';
+
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+
+            // Update nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+
+            if (lang === 'en') {
+                document.querySelectorAll('.en-content').forEach(el => el.classList.remove('hidden'));
+                document.querySelectorAll('.it-content').forEach(el => el.classList.add('hidden'));
+                document.querySelector('.lang-button[onclick="switchLanguage(\'en\')"]').classList.add('active');
+                document.querySelector('.lang-button[onclick="switchLanguage(\'it\')"]').classList.remove('active');
+            } else {
+                document.querySelectorAll('.en-content').forEach(el => el.classList.add('hidden'));
+                document.querySelectorAll('.it-content').forEach(el => el.classList.remove('hidden'));
+                document.querySelector('.lang-button[onclick="switchLanguage(\'it\')"]').classList.add('active');
+                document.querySelector('.lang-button[onclick="switchLanguage(\'en\')"]').classList.remove('active');
+            }
+        }
+
+        // Keyboard shortcut Ctrl+L for language toggle
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'l') {
+                e.preventDefault();
+                switchLanguage(currentLang === 'en' ? 'it' : 'en');
+            }
+        });
+
+        // Function to navigate to sectors page with current language
+        function goToSectors() {
+            window.location.href = 'settori-focus.html?lang=' + currentLang;
+        }
+
+        // Pillar expansion system
+        function togglePillar(pillarNumber) {
+            const detailsElement = document.getElementById(`pillar${pillarNumber}-details`);
+            const cardElement = document.querySelector(`[onclick="togglePillar(${pillarNumber})"]`);
+
+            if (detailsElement.style.display === 'none' || detailsElement.style.display === '') {
+                // Close all other pillars first
+                for (let i = 1; i <= 3; i++) {
+                    if (i !== pillarNumber) {
+                        const otherDetails = document.getElementById(`pillar${i}-details`);
+                        const otherCard = document.querySelector(`[onclick="togglePillar(${i})"]`);
+                        if (otherDetails) {
+                            otherDetails.style.display = 'none';
+                            otherCard.classList.remove('expanded');
+                        }
+                    }
+                }
+
+                // Open this pillar
+                detailsElement.style.display = 'block';
+                cardElement.classList.add('expanded');
+            } else {
+                // Close this pillar
+                detailsElement.style.display = 'none';
+                cardElement.classList.remove('expanded');
+            }
+        }
+    </script>
+</body>
+</html>
